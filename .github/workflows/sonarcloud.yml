@@ -1,0 +1,33 @@
+name: SonarCloud
+
+on:
+  push:
+   branches: ["main"]
+
+jobs:
+  analyze:
+    name: SonarCloud Analysis
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: 17
+        distribution: 'temurin'
+  
+    - name: Build and test with Maven (gera relatório Jacoco)
+      run: mvn clean verify
+
+    - name: Analyze with SonarCloud
+      run: |
+        mvn sonar:sonar \
+            -Dsonar.projectKey=matcarv-mockito-test-api \
+            -Dsonar.organization=matcarv \
+            -Dsonar.java.binaries=target/classes \
+            -Dsonar.host.url=https://sonarcloud.io \
+            -Dsonar.login="${{ secrets.SONAR_TOKEN }}" \
+            -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
