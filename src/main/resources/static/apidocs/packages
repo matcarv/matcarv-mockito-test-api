@@ -1,0 +1,9 @@
+com.matcarv.app.repository
+com.matcarv.app
+com.matcarv.app.config
+com.matcarv.app.resources
+com.matcarv.app.enums
+com.matcarv.app.business
+com.matcarv.app.converters
+com.matcarv.app.dtos
+com.matcarv.app.entities

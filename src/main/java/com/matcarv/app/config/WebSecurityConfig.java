@@ -15,14 +15,16 @@ import org.springframework.security.web.SecurityFilterChain;
 
 /**
  * Configuration class for setting up web security using Spring Security.
+ * 
+ * @author Weslley Matos
  */
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
 
     /**
-	 * 
-	 * @return
+	 * UserDetailsService bean.
+	 * @return UserDetailsService
 	 */
 	@Bean
 	UserDetailsService userDetailsService() {
@@ -35,9 +37,10 @@ public class WebSecurityConfig {
 	}
 
     /**
+	 * Security filter chain bean.
 	 * 
-	 * @param http
-	 * @return
+	 * @param http the HttpSecurity
+	 * @return SecurityFilterChain
 	 * @throws Exception
 	 */
 	@Bean
@@ -61,8 +64,9 @@ public class WebSecurityConfig {
 	}
 	
 	/**
+	 * Password encoder bean.
 	 * 
-	 * @return
+	 * @return PasswordEncoder
 	 */
 	@Bean
     PasswordEncoder passwordEncoder() {

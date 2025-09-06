@@ -8,36 +8,38 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 /**
  * Tratamento de exceções do microserviço.
+ * 
+ * @author Weslley Matos
  */
 @ControllerAdvice
-<span class="nc" id="L13">public class MicroserviceExceptionHandler {</span>
+<span class="nc" id="L15">public class MicroserviceExceptionHandler {</span>
 
     /**
      * Tratamento de exceções de requisição inválida.
      * 
-     * @param e
-     * @return
+     * @param e the exception
+     * @return ResponseEntity with error details
      */
     @ExceptionHandler(Exception.class)
     public ResponseEntity&lt;String&gt; handleBadRequestException(Exception e) {
-<span class="nc" id="L23">        return ResponseEntity.status(HttpStatus.BAD_REQUEST)</span>
-<span class="nc" id="L24">                .body(&quot;Erro de requisição inválida: &quot; + e.getMessage());</span>
+<span class="nc" id="L25">        return ResponseEntity.status(HttpStatus.BAD_REQUEST)</span>
+<span class="nc" id="L26">                .body(&quot;Erro de requisição inválida: &quot; + e.getMessage());</span>
     }
 
     /**
 	 * Tratamento de exceções de validação.
      * 
-	 * @param e
-	 * @return
+	 * @param e the exception
+	 * @return ResponseEntity with error details
 	 */
 	@ExceptionHandler({ MethodArgumentNotValidException.class })
 	public ResponseEntity&lt;?&gt; handleException(final MethodArgumentNotValidException ex) {
-<span class="nc" id="L35">		return ResponseEntity</span>
-<span class="nc" id="L36">                .status(ex.getStatusCode())</span>
-<span class="nc" id="L37">                .body(ex.getBindingResult()</span>
-<span class="nc" id="L38">                		.getAllErrors()</span>
-<span class="nc" id="L39">                		.stream().map(e -&gt; { </span>
-<span class="nc" id="L40">                			return e.getDefaultMessage(); </span>
+<span class="nc" id="L37">		return ResponseEntity</span>
+<span class="nc" id="L38">                .status(ex.getStatusCode())</span>
+<span class="nc" id="L39">                .body(ex.getBindingResult()</span>
+<span class="nc" id="L40">                		.getAllErrors()</span>
+<span class="nc" id="L41">                		.stream().map(e -&gt; { </span>
+<span class="nc" id="L42">                			return e.getDefaultMessage(); </span>
                 		})
                 	);
 	 }

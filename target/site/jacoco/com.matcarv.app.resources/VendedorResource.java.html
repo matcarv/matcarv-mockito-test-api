@@ -19,14 +19,19 @@ import java.util.UUID;
 @Tag(name = &quot;Vendedor&quot;, description = &quot;Operações relacionadas a vendedores&quot;)
 <span class="fc" id="L20">public class VendedorResource {</span>
 
+    /* Injeção de dependência */
     @Autowired
     private VendedorBusiness vendedorBusiness;
 
+    /* Injeção de dependência */
     @Autowired
     private VendedorConverter vendedorConverter;
 
     /**
      * Endpoint para criação de Vendedor
+     * 
+     * @param vendedorDTO Dados do Vendedor a ser criado
+     * @return ResponseEntity com o Vendedor criado
      */
     @Operation(
         summary = &quot;Criar vendedor&quot;,
@@ -44,15 +49,18 @@ import java.util.UUID;
     )
     @PostMapping(&quot;/vendedor&quot;)
     public ResponseEntity&lt;?&gt; insert(@Valid @RequestBody final VendedorDTO vendedorDTO) {
-<span class="fc" id="L47">        return ResponseEntity.created(null).body(</span>
-<span class="fc" id="L48">            vendedorConverter.toDTO(</span>
-<span class="fc" id="L49">                vendedorBusiness.insertOrUpdate(vendedorConverter.toEntity(vendedorDTO), TransactionType.INSERT)</span>
+<span class="fc" id="L52">        return ResponseEntity.created(null).body(</span>
+<span class="fc" id="L53">            vendedorConverter.toDTO(</span>
+<span class="fc" id="L54">                vendedorBusiness.insertOrUpdate(vendedorConverter.toEntity(vendedorDTO), TransactionType.INSERT)</span>
             )
         );
     }
 
     /**
      * Endpoint para atualização de Vendedor
+     *
+     * @param vendedorDTO Dados do Vendedor a ser atualizado
+     * @return ResponseEntity com o Vendedor atualizado
      */
     @Operation(
         summary = &quot;Atualizar vendedor&quot;,
@@ -71,15 +79,18 @@ import java.util.UUID;
     )
     @PutMapping(&quot;/vendedor&quot;)
     public ResponseEntity&lt;?&gt; update(@Valid @RequestBody final VendedorDTO vendedorDTO) {
-<span class="fc" id="L74">        return ResponseEntity.ok(</span>
-<span class="fc" id="L75">            vendedorConverter.toDTO(</span>
-<span class="fc" id="L76">                vendedorBusiness.insertOrUpdate(vendedorConverter.toEntity(vendedorDTO), TransactionType.UPDATE)</span>
+<span class="fc" id="L82">        return ResponseEntity.ok(</span>
+<span class="fc" id="L83">            vendedorConverter.toDTO(</span>
+<span class="fc" id="L84">                vendedorBusiness.insertOrUpdate(vendedorConverter.toEntity(vendedorDTO), TransactionType.UPDATE)</span>
             )
         );
     }
 
     /**
      * Endpoint para exclusão de Vendedor
+     * 
+     * @param id ID do Vendedor a ser excluído
+     * @return ResponseEntity sem conteúdo
      */
     @Operation(
         summary = &quot;Excluir vendedor&quot;,
@@ -98,12 +109,15 @@ import java.util.UUID;
     )
     @DeleteMapping(&quot;/vendedor/{id}&quot;)
     public ResponseEntity&lt;?&gt; delete(@PathVariable final UUID id) {
-<span class="fc" id="L101">        vendedorBusiness.deleteById(id);</span>
-<span class="fc" id="L102">        return ResponseEntity.ok().build();</span>
+<span class="fc" id="L112">        vendedorBusiness.deleteById(id);</span>
+<span class="fc" id="L113">        return ResponseEntity.ok().build();</span>
     }
 
     /**
      * Obter Vendedor por ID
+     * 
+     * @param id ID do Vendedor a ser obtido
+     * @return ResponseEntity com o Vendedor encontrado
      */
     @Operation(
         summary = &quot;Buscar vendedor por ID&quot;,
@@ -122,15 +136,18 @@ import java.util.UUID;
     )
     @GetMapping(&quot;/vendedor/{id}&quot;)
     public ResponseEntity&lt;?&gt; getVendedorById(@PathVariable final UUID id) {
-<span class="fc" id="L125">        return ResponseEntity.ok(</span>
-<span class="fc" id="L126">            vendedorConverter.toDTO(</span>
-<span class="fc" id="L127">                vendedorBusiness.findById(id)</span>
+<span class="fc" id="L139">        return ResponseEntity.ok(</span>
+<span class="fc" id="L140">            vendedorConverter.toDTO(</span>
+<span class="fc" id="L141">                vendedorBusiness.findById(id)</span>
             )
         );
     }
 
     /**
      * Obter Vendedor por CPF
+     * 
+     * @param cpf CPF do Vendedor a ser obtido
+     * @return ResponseEntity com o Vendedor encontrado
      */
     @Operation(
         summary = &quot;Buscar vendedor por CPF&quot;,
@@ -149,9 +166,9 @@ import java.util.UUID;
     )
     @GetMapping(&quot;/vendedor/cpf/{cpf}&quot;)
     public ResponseEntity&lt;?&gt; getVendedorByCpf(@PathVariable final String cpf) {
-<span class="fc" id="L152">        return ResponseEntity.ok(</span>
-<span class="fc" id="L153">            vendedorConverter.toDTO(</span>
-<span class="fc" id="L154">                vendedorBusiness.findByCpf(cpf)</span>
+<span class="fc" id="L169">        return ResponseEntity.ok(</span>
+<span class="fc" id="L170">            vendedorConverter.toDTO(</span>
+<span class="fc" id="L171">                vendedorBusiness.findByCpf(cpf)</span>
             )
         );
     }

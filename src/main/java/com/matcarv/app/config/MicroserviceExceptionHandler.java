@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 /**
  * Tratamento de exceções do microserviço.
+ * 
+ * @author Weslley Matos
  */
 @ControllerAdvice
 public class MicroserviceExceptionHandler {
@@ -15,8 +17,8 @@ public class MicroserviceExceptionHandler {
     /**
      * Tratamento de exceções de requisição inválida.
      * 
-     * @param e
-     * @return
+     * @param e the exception
+     * @return ResponseEntity with error details
      */
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleBadRequestException(Exception e) {
@@ -27,8 +29,8 @@ public class MicroserviceExceptionHandler {
     /**
 	 * Tratamento de exceções de validação.
      * 
-	 * @param e
-	 * @return
+	 * @param e the exception
+	 * @return ResponseEntity with error details
 	 */
 	@ExceptionHandler({ MethodArgumentNotValidException.class })
 	public ResponseEntity<?> handleException(final MethodArgumentNotValidException ex) {

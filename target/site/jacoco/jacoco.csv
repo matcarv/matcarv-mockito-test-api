@@ -1,7 +1,6 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
 matcarv-mockito-test-api,com.matcarv.app.business,VendedorBusinessImpl,21,58,1,3,1,13,3,6,2,5
 matcarv-mockito-test-api,com.matcarv.app.business,ClienteBusinessImpl,21,58,1,3,1,13,3,6,2,5
-matcarv-mockito-test-api,com.matcarv.app.dtos,PedidoDTO,3,0,0,0,1,0,1,0,1,0
 matcarv-mockito-test-api,com.matcarv.app.enums,TransactionType,0,15,0,0,0,3,0,1,0,1
 matcarv-mockito-test-api,com.matcarv.app.resources,VendedorResource,0,56,0,0,0,15,0,6,0,6
 matcarv-mockito-test-api,com.matcarv.app.resources,ClienteResource,0,56,0,0,0,15,0,6,0,6

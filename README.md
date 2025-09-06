@@ -32,6 +32,14 @@ src/test/java/com/matcarv/app/
 	converters/      # Testes unitários dos converters
 ```
 
+
+## Documentação Javadoc
+Após rodar o comando `mvn javadoc:javadoc` e copiar a pasta gerada para `src/main/resources/static/apidocs`, a documentação Javadoc estará disponível via navegador em:
+
+```
+http://localhost:8080/apidocs/index.html
+```
+
 ## Endpoints Principais
 Todos os endpoints estão documentados via OpenAPI/Swagger em `/mockito/v1/swagger-ui.html`.
 

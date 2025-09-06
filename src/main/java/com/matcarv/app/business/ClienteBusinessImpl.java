@@ -3,6 +3,7 @@ package com.matcarv.app.business;
 import com.matcarv.app.entities.Cliente;
 import com.matcarv.app.enums.TransactionType;
 import com.matcarv.app.repository.ClienteRepository;
+import lombok.Getter;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -10,25 +11,30 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import jakarta.persistence.EntityNotFoundException;
 import java.util.UUID;
-import lombok.Getter;
 
 /**
- * Business implementation for Cliente entity.
+ * Implementação das regras de negócio para Cliente.
+ *
+ * @author Weslley Matos
  */
 @Component
 @Transactional(propagation = Propagation.SUPPORTS)
 public class ClienteBusinessImpl implements ClienteBusiness {
 
-	/* Repository for Cliente entity */
+	/**
+	 * Repositório para Cliente.
+	 */
 	@Getter
 	@Autowired
 	private ClienteRepository clienteRepository;
 
-	/* Insert or update Cliente
+
+	/**
+	 * Insere ou atualiza um cliente.
 	 *
-	 * @param cliente the Cliente entity to insert or update
-	 * @param transactionType the type of transaction (INSERT or UPDATE)
-	 * @return the inserted or updated Cliente entity
+	 * @param cliente Cliente a ser inserido ou atualizado
+	 * @param transactionType Tipo de transação (INSERT ou UPDATE)
+	 * @return Cliente inserido ou atualizado
 	 */
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
@@ -44,38 +50,41 @@ public class ClienteBusinessImpl implements ClienteBusiness {
 			default:
 				break;
 		}
-		return getClienteRepository().save(cliente);
+		return clienteRepository.save(cliente);
 	}
 
-	/* Delete Cliente by ID
+	/**
+	 * Remove um cliente pelo ID.
 	 *
-	 * @param id the ID of the Cliente entity to delete
+	 * @param id ID do cliente a ser removido
 	 */
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void deleteById(final UUID id) {
-		getClienteRepository().deleteById(id);
+		clienteRepository.deleteById(id);
 	}
 
-	/* Find Cliente by ID
+	/**
+	 * Busca um cliente pelo ID.
 	 *
-	 * @param id the ID of the Cliente entity to find
-	 * @return the found Cliente entity
-	*/
+	 * @param id ID do cliente
+	 * @return Cliente encontrado
+	 */
 	@Override
 	public Cliente findById(final UUID id) {
-		return getClienteRepository().findById(id)
+		return clienteRepository.findById(id)
 			.orElseThrow(() -> new EntityNotFoundException("Cliente not found with id: " + id));
 	}
 
-	/* Find Cliente by CPF
+	/**
+	 * Busca um cliente pelo CPF.
 	 *
-	 * @param cpf the CPF of the Cliente
-	 * @return the found Cliente entity
+	 * @param cpf CPF do cliente
+	 * @return Cliente encontrado
 	 */
 	@Override
 	public Cliente findByCpf(final String cpf) {
-		return getClienteRepository().findByCpf(cpf)
+		return clienteRepository.findByCpf(cpf)
 			.orElseThrow(() -> new EntityNotFoundException("Cliente not found with CPF: " + cpf));
 	}
 }

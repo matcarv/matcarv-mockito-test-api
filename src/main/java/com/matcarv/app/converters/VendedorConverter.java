@@ -9,11 +9,16 @@ import java.time.ZoneId;
 
 import org.springframework.stereotype.Component;
 
-/* Conversor de Vendedor */
+/**
+ * Conversor de Vendedor.
+ * Responsável por converter entre Vendedor e VendedorDTO.
+ *
+ * @author Weslley Matos
+ */
 @Component
 public class VendedorConverter {
 
-    /* Converte um Vendedor para VendedorDTO
+    /** Converte um Vendedor para VendedorDTO
      *
      * @param vendedor o Vendedor a ser convertido
      * @return o VendedorDTO convertido
@@ -43,7 +48,7 @@ public class VendedorConverter {
         return dto;
     }
 
-    /* Converte um VendedorDTO para Vendedor
+    /** Converte um VendedorDTO para Vendedor
      *
      * @param dto o VendedorDTO a ser convertido
      * @return o Vendedor convertido

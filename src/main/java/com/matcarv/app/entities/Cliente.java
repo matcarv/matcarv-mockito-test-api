@@ -5,7 +5,10 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * Repository interface for Cliente entity.
+ * Entidade Cliente.
+ * Representa um cliente do sistema.
+ *
+ * @author Weslley Matos
  */
 @Data
 @Entity

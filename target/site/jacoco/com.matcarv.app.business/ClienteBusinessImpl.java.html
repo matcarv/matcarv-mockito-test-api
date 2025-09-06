@@ -3,6 +3,7 @@
 import com.matcarv.app.entities.Cliente;
 import com.matcarv.app.enums.TransactionType;
 import com.matcarv.app.repository.ClienteRepository;
+import lombok.Getter;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -10,73 +11,81 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import jakarta.persistence.EntityNotFoundException;
 import java.util.UUID;
-import lombok.Getter;
 
 /**
- * Business implementation for Cliente entity.
+ * Implementação das regras de negócio para Cliente.
+ *
+ * @author Weslley Matos
  */
 @Component
 @Transactional(propagation = Propagation.SUPPORTS)
-<span class="fc" id="L20">public class ClienteBusinessImpl implements ClienteBusiness {</span>
+<span class="fc" id="L22">public class ClienteBusinessImpl implements ClienteBusiness {</span>
 
-	/* Repository for Cliente entity */
+	/**
+	 * Repositório para Cliente.
+	 */
 	@Getter
 	@Autowired
 	private ClienteRepository clienteRepository;
 
-	/* Insert or update Cliente
+
+	/**
+	 * Insere ou atualiza um cliente.
 	 *
-	 * @param cliente the Cliente entity to insert or update
-	 * @param transactionType the type of transaction (INSERT or UPDATE)
-	 * @return the inserted or updated Cliente entity
+	 * @param cliente Cliente a ser inserido ou atualizado
+	 * @param transactionType Tipo de transação (INSERT ou UPDATE)
+	 * @return Cliente inserido ou atualizado
 	 */
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
 	public Cliente insertOrUpdate(final Cliente cliente, final TransactionType transactionType) {
-<span class="fc bfc" id="L36" title="All 2 branches covered.">		switch (transactionType) {</span>
+<span class="fc bfc" id="L42" title="All 2 branches covered.">		switch (transactionType) {</span>
 			case UPDATE:
-<span class="fc" id="L38">				final Cliente existingCliente = findById(cliente.getId());</span>
-<span class="pc bpc" id="L39" title="1 of 2 branches missed.">				if (existingCliente == null) {</span>
-<span class="nc" id="L40">					throw new EntityNotFoundException(&quot;Cliente not found with id: &quot; + cliente.getId());</span>
+<span class="fc" id="L44">				final Cliente existingCliente = findById(cliente.getId());</span>
+<span class="pc bpc" id="L45" title="1 of 2 branches missed.">				if (existingCliente == null) {</span>
+<span class="nc" id="L46">					throw new EntityNotFoundException(&quot;Cliente not found with id: &quot; + cliente.getId());</span>
 				}
-<span class="fc" id="L42">				BeanUtils.copyProperties(cliente, existingCliente, &quot;id&quot;, &quot;dataCriacao&quot;);</span>
-<span class="fc" id="L43">				break;</span>
+<span class="fc" id="L48">				BeanUtils.copyProperties(cliente, existingCliente, &quot;id&quot;, &quot;dataCriacao&quot;);</span>
+<span class="fc" id="L49">				break;</span>
 			default:
 				break;
 		}
-<span class="fc" id="L47">		return getClienteRepository().save(cliente);</span>
+<span class="fc" id="L53">		return clienteRepository.save(cliente);</span>
 	}
 
-	/* Delete Cliente by ID
+	/**
+	 * Remove um cliente pelo ID.
 	 *
-	 * @param id the ID of the Cliente entity to delete
+	 * @param id ID do cliente a ser removido
 	 */
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void deleteById(final UUID id) {
-<span class="fc" id="L57">		getClienteRepository().deleteById(id);</span>
-<span class="fc" id="L58">	}</span>
+<span class="fc" id="L64">		clienteRepository.deleteById(id);</span>
+<span class="fc" id="L65">	}</span>
 
-	/* Find Cliente by ID
+	/**
+	 * Busca um cliente pelo ID.
 	 *
-	 * @param id the ID of the Cliente entity to find
-	 * @return the found Cliente entity
-	*/
+	 * @param id ID do cliente
+	 * @return Cliente encontrado
+	 */
 	@Override
 	public Cliente findById(final UUID id) {
-<span class="fc" id="L67">		return getClienteRepository().findById(id)</span>
-<span class="pc" id="L68">			.orElseThrow(() -&gt; new EntityNotFoundException(&quot;Cliente not found with id: &quot; + id));</span>
+<span class="fc" id="L75">		return clienteRepository.findById(id)</span>
+<span class="pc" id="L76">			.orElseThrow(() -&gt; new EntityNotFoundException(&quot;Cliente not found with id: &quot; + id));</span>
 	}
 
-	/* Find Cliente by CPF
+	/**
+	 * Busca um cliente pelo CPF.
 	 *
-	 * @param cpf the CPF of the Cliente
-	 * @return the found Cliente entity
+	 * @param cpf CPF do cliente
+	 * @return Cliente encontrado
 	 */
 	@Override
 	public Cliente findByCpf(final String cpf) {
-<span class="fc" id="L78">		return getClienteRepository().findByCpf(cpf)</span>
-<span class="pc" id="L79">			.orElseThrow(() -&gt; new EntityNotFoundException(&quot;Cliente not found with CPF: &quot; + cpf));</span>
+<span class="fc" id="L87">		return clienteRepository.findByCpf(cpf)</span>
+<span class="pc" id="L88">			.orElseThrow(() -&gt; new EntityNotFoundException(&quot;Cliente not found with CPF: &quot; + cpf));</span>
 	}
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

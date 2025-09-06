@@ -14,17 +14,19 @@ import lombok.Getter;
 
 /**
  * Business implementation for Vendedor entity.
+ * 
+ * @author Weslley Matos
  */
 @Component
 @Transactional(propagation = Propagation.SUPPORTS)
-<span class="fc" id="L20">public class VendedorBusinessImpl implements VendedorBusiness {</span>
+<span class="fc" id="L22">public class VendedorBusinessImpl implements VendedorBusiness {</span>
 
     /* Repository for Vendedor entity */
     @Getter
     @Autowired
     private VendedorRepository vendedorRepository;
 
-    /* Insert or update Vendedor
+    /** Insert or update Vendedor
      *
      * @param vendedor the Vendedor entity to insert or update
      * @param transactionType the type of transaction (INSERT or UPDATE)
@@ -33,52 +35,52 @@ import lombok.Getter;
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public Vendedor insertOrUpdate(final Vendedor vendedor, TransactionType transactionType) {
-<span class="fc bfc" id="L36" title="All 2 branches covered.">        switch (transactionType) {</span>
+<span class="fc bfc" id="L38" title="All 2 branches covered.">        switch (transactionType) {</span>
             case UPDATE:
-<span class="fc" id="L38">                final Vendedor existingVendedor = findById(vendedor.getId());</span>
-<span class="pc bpc" id="L39" title="1 of 2 branches missed.">                if (existingVendedor == null) {</span>
-<span class="nc" id="L40">                    throw new EntityNotFoundException(&quot;Vendedor not found with id: &quot; + vendedor.getId());</span>
+<span class="fc" id="L40">                final Vendedor existingVendedor = findById(vendedor.getId());</span>
+<span class="pc bpc" id="L41" title="1 of 2 branches missed.">                if (existingVendedor == null) {</span>
+<span class="nc" id="L42">                    throw new EntityNotFoundException(&quot;Vendedor not found with id: &quot; + vendedor.getId());</span>
                 }
 
-<span class="fc" id="L43">                BeanUtils.copyProperties(vendedor, existingVendedor, &quot;id&quot;, &quot;dataCriacao&quot;);</span>
-<span class="fc" id="L44">                break;</span>
+<span class="fc" id="L45">                BeanUtils.copyProperties(vendedor, existingVendedor, &quot;id&quot;, &quot;dataCriacao&quot;);</span>
+<span class="fc" id="L46">                break;</span>
             default:
                 break;
         }
         
-<span class="fc" id="L49">        return getVendedorRepository().save(vendedor);</span>
+<span class="fc" id="L51">        return getVendedorRepository().save(vendedor);</span>
     }
 
-    /* Delete Vendedor by ID
+    /** Delete Vendedor by ID
      *
      * @param id the ID of the Vendedor entity to delete
      */
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public void deleteById(final UUID id) {
-<span class="fc" id="L59">        getVendedorRepository().deleteById(id);</span>
-<span class="fc" id="L60">    }</span>
+<span class="fc" id="L61">        getVendedorRepository().deleteById(id);</span>
+<span class="fc" id="L62">    }</span>
 
-    /* Find Vendedor by ID
+    /** Find Vendedor by ID
      *
      * @param id the ID of the Vendedor entity to find
      * @return the found Vendedor entity
     */
     @Override
     public Vendedor findById(final UUID id) {
-<span class="fc" id="L69">        return getVendedorRepository().findById(id)</span>
-<span class="pc" id="L70">            .orElseThrow(() -&gt; new EntityNotFoundException(&quot;Vendedor not found with id: &quot; + id));</span>
+<span class="fc" id="L71">        return getVendedorRepository().findById(id)</span>
+<span class="pc" id="L72">            .orElseThrow(() -&gt; new EntityNotFoundException(&quot;Vendedor not found with id: &quot; + id));</span>
     }
 
-    /* Find Vendedor by CPF
+    /** Find Vendedor by CPF
      *
      * @param cpf the CPF of the Vendedor
      * @return the found Vendedor entity
      */
     @Override
     public Vendedor findByCpf(final String cpf) {
-<span class="fc" id="L80">        return getVendedorRepository().findByCpf(cpf)</span>
-<span class="pc" id="L81">            .orElseThrow(() -&gt; new EntityNotFoundException(&quot;Vendedor not found with CPF: &quot; + cpf));</span>
+<span class="fc" id="L82">        return getVendedorRepository().findByCpf(cpf)</span>
+<span class="pc" id="L83">            .orElseThrow(() -&gt; new EntityNotFoundException(&quot;Vendedor not found with CPF: &quot; + cpf));</span>
     }
 
 }

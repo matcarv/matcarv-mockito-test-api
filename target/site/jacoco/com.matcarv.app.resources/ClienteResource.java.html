@@ -12,10 +12,15 @@ import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import java.util.UUID;
 
-/* Controlador de Clientes */
+/**
+ * Controlador REST para operações de Cliente.
+ * Expõe endpoints para CRUD e busca por CPF.
+ *
+ * @author Weslley Matos
+ */
 @RestController
 @Tag(name = &quot;Cliente&quot;, description = &quot;Operações relacionadas a clientes&quot;)
-<span class="fc" id="L18">public class ClienteResource {</span>
+<span class="fc" id="L23">public class ClienteResource {</span>
 
     /* Injeção de dependência */
     @Autowired
@@ -25,7 +30,7 @@ import java.util.UUID;
     @Autowired
     private ClienteConverter clienteConverter;
 
-    /* Endpoint para criação de Cliente
+    /** Endpoint para criação de Cliente
      *
      * @param clienteDTO Dados do Cliente a ser criado
      * @return ResponseEntity com o Cliente criado
@@ -46,14 +51,14 @@ import java.util.UUID;
     )
     @PostMapping(&quot;/cliente&quot;)
     public ResponseEntity&lt;?&gt; insert(@Valid @RequestBody final ClienteDTO clienteDTO) {
-<span class="fc" id="L49">        return ResponseEntity.created(null).body(</span>
-<span class="fc" id="L50">            clienteConverter.toDTO(</span>
-<span class="fc" id="L51">                clienteBusiness.insertOrUpdate(clienteConverter.toEntity(clienteDTO), TransactionType.INSERT)</span>
+<span class="fc" id="L54">        return ResponseEntity.created(null).body(</span>
+<span class="fc" id="L55">            clienteConverter.toDTO(</span>
+<span class="fc" id="L56">                clienteBusiness.insertOrUpdate(clienteConverter.toEntity(clienteDTO), TransactionType.INSERT)</span>
             )
         );
     }
 
-    /* Endpoint para atualização de Cliente
+    /** Endpoint para atualização de Cliente
      *
      * @param clienteDTO Dados do Cliente a ser atualizado
      * @return ResponseEntity com o Cliente atualizado
@@ -75,14 +80,14 @@ import java.util.UUID;
     )
     @PutMapping(&quot;/cliente&quot;)
     public ResponseEntity&lt;?&gt; update(@Valid @RequestBody final ClienteDTO clienteDTO) {
-<span class="fc" id="L78">        return ResponseEntity.ok(</span>
-<span class="fc" id="L79">            clienteConverter.toDTO(</span>
-<span class="fc" id="L80">                clienteBusiness.insertOrUpdate(clienteConverter.toEntity(clienteDTO), TransactionType.UPDATE)</span>
+<span class="fc" id="L83">        return ResponseEntity.ok(</span>
+<span class="fc" id="L84">            clienteConverter.toDTO(</span>
+<span class="fc" id="L85">                clienteBusiness.insertOrUpdate(clienteConverter.toEntity(clienteDTO), TransactionType.UPDATE)</span>
             )
         );
     }
 
-    /* Endpoint para exclusão de Cliente
+    /** Endpoint para exclusão de Cliente
      *
      * @param id ID do Cliente a ser excluído
      * @return ResponseEntity com status da operação
@@ -104,12 +109,12 @@ import java.util.UUID;
     )
     @DeleteMapping(&quot;/cliente/{id}&quot;)
     public ResponseEntity&lt;?&gt; delete(@PathVariable final UUID id) {
-<span class="fc" id="L107">        clienteBusiness.deleteById(id);</span>
+<span class="fc" id="L112">        clienteBusiness.deleteById(id);</span>
 
-<span class="fc" id="L109">        return ResponseEntity.ok().build();</span>
+<span class="fc" id="L114">        return ResponseEntity.ok().build();</span>
     }
 
-    /* Obter Cliente por ID
+    /** Obter Cliente por ID
      *
      * @param id ID do Cliente
      * @return ClienteDTO
@@ -131,14 +136,14 @@ import java.util.UUID;
     )
     @GetMapping(&quot;/cliente/{id}&quot;)
     public ResponseEntity&lt;?&gt; getClienteById(@PathVariable final UUID id) {
-<span class="fc" id="L134">        return ResponseEntity.ok(</span>
-<span class="fc" id="L135">            clienteConverter.toDTO(</span>
-<span class="fc" id="L136">                clienteBusiness.findById(id)</span>
+<span class="fc" id="L139">        return ResponseEntity.ok(</span>
+<span class="fc" id="L140">            clienteConverter.toDTO(</span>
+<span class="fc" id="L141">                clienteBusiness.findById(id)</span>
             )
         );
     }
 
-      /* Obter Cliente por ID
+    /** Obter Cliente por ID
      *
      * @param id ID do Cliente
      * @return ClienteDTO
@@ -160,9 +165,9 @@ import java.util.UUID;
     )
     @GetMapping(&quot;/cliente/cpf/{cpf}&quot;)
     public ResponseEntity&lt;?&gt; getClienteByCpf(@PathVariable final String cpf) {
-<span class="fc" id="L163">        return ResponseEntity.ok(</span>
-<span class="fc" id="L164">            clienteConverter.toDTO(</span>
-<span class="fc" id="L165">                clienteBusiness.findByCpf(cpf)</span>
+<span class="fc" id="L168">        return ResponseEntity.ok(</span>
+<span class="fc" id="L169">            clienteConverter.toDTO(</span>
+<span class="fc" id="L170">                clienteBusiness.findByCpf(cpf)</span>
             )
         );
     }

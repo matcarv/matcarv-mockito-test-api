@@ -8,7 +8,10 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 /**
- * Entidade base para Cliente e Vendedor
+ * Entidade base para Cliente e Vendedor.
+ * Contém atributos comuns a todas as pessoas do sistema.
+ *
+ * @author Weslley Matos
  */
 @Data
 @Entity

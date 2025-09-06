@@ -13,7 +13,10 @@ import java.time.ZonedDateTime;
 import java.util.UUID;
 
 /**
- * Data Transfer Object for Vendedor
+ * Data Transfer Object (DTO) para Vendedor.
+ * Utilizado para transferência de dados entre camadas.
+ *
+ * @author Weslley Matos
  */
 @Data
 @EqualsAndHashCode(callSuper = false, of = {"id"})

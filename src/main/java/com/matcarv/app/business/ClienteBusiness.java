@@ -4,36 +4,42 @@ import com.matcarv.app.entities.Cliente;
 import com.matcarv.app.enums.TransactionType;
 import java.util.UUID;
 
-/*
- * Business interface for Cliente entity.
+/**
+ * Interface que define as operações de negócio para Cliente.
+ *
+ * @author Weslley Matos
  */
 public interface ClienteBusiness {
 
-    /* Insert or update Cliente
+    /**
+     * Insere ou atualiza um cliente.
      *
-     * @param cliente the Cliente entity to insert or update
-     * @param transactionType the type of transaction (INSERT or UPDATE)
-     * @return the inserted or updated Cliente entity
+     * @param cliente Cliente a ser inserido ou atualizado
+     * @param transactionType Tipo de transação (INSERT ou UPDATE)
+     * @return Cliente inserido ou atualizado
      */
     public Cliente insertOrUpdate(final Cliente cliente, final TransactionType transactionType);
 
-    /* Delete Cliente by ID
+    /**
+     * Remove um cliente pelo ID.
      *
-     * @param id the ID of the Cliente entity to delete
+     * @param id ID do cliente a ser removido
      */
     public void deleteById(final UUID id);
 
-    /* Find Cliente by ID
+    /**
+     * Busca um cliente pelo ID.
      *
-     * @param id the ID of the Cliente entity to find
-     * @return the found Cliente entity
+     * @param id ID do cliente
+     * @return Cliente encontrado ou null se não existir
      */
     public Cliente findById(final UUID id);
 
-    /* Find Cliente by CPF
+    /**
+     * Busca um cliente pelo CPF.
      *
-     * @param cpf the CPF of the Cliente
-     * @return the found Cliente entity
+     * @param cpf CPF do cliente
+     * @return Cliente encontrado ou null se não existir
      */
     public Cliente findByCpf(String cpf);
 

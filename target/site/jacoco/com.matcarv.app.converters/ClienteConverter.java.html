@@ -9,67 +9,72 @@ import java.time.ZoneId;
 
 import org.springframework.stereotype.Component;
 
-/* Conversor de Cliente */
+/**
+ * Conversor de Cliente.
+ * Responsável por converter entre Cliente e ClienteDTO.
+ *
+ * @author Weslley Matos
+ */
 @Component
-<span class="fc" id="L14">public class ClienteConverter {</span>
+<span class="fc" id="L19">public class ClienteConverter {</span>
 
-    /* Converte um Cliente para ClienteDTO
+    /** Converte um Cliente para ClienteDTO
      *
      * @param cliente o Cliente a ser convertido
      * @return o ClienteDTO convertido
     */
     public ClienteDTO toDTO(final Cliente cliente) {
-<span class="fc" id="L22">        final ClienteDTO dto = new ClienteDTO();</span>
-<span class="fc" id="L23">        dto.setId(cliente.getId());</span>
-<span class="fc" id="L24">        dto.setNome(cliente.getNome());</span>
-<span class="fc" id="L25">        dto.setEmail(cliente.getEmail());</span>
-<span class="fc" id="L26">        dto.setTelefone(cliente.getTelefone());</span>
+<span class="fc" id="L27">        final ClienteDTO dto = new ClienteDTO();</span>
+<span class="fc" id="L28">        dto.setId(cliente.getId());</span>
+<span class="fc" id="L29">        dto.setNome(cliente.getNome());</span>
+<span class="fc" id="L30">        dto.setEmail(cliente.getEmail());</span>
+<span class="fc" id="L31">        dto.setTelefone(cliente.getTelefone());</span>
 
-<span class="pc bpc" id="L28" title="1 of 2 branches missed.">        if (cliente.getEndereco() != null) {</span>
-<span class="fc" id="L29">            dto.setEndereco(cliente.getEndereco().getLogradouro());</span>
-<span class="fc" id="L30">            dto.setNumero(cliente.getEndereco().getNumero());</span>
-<span class="fc" id="L31">            dto.setComplemento(cliente.getEndereco().getComplemento());</span>
-<span class="fc" id="L32">            dto.setBairro(cliente.getEndereco().getBairro());</span>
-<span class="fc" id="L33">            dto.setCidade(cliente.getEndereco().getCidade());</span>
-<span class="fc" id="L34">            dto.setEstado(cliente.getEndereco().getEstado());</span>
-<span class="fc" id="L35">            dto.setCep(cliente.getEndereco().getCep());</span>
+<span class="pc bpc" id="L33" title="1 of 2 branches missed.">        if (cliente.getEndereco() != null) {</span>
+<span class="fc" id="L34">            dto.setEndereco(cliente.getEndereco().getLogradouro());</span>
+<span class="fc" id="L35">            dto.setNumero(cliente.getEndereco().getNumero());</span>
+<span class="fc" id="L36">            dto.setComplemento(cliente.getEndereco().getComplemento());</span>
+<span class="fc" id="L37">            dto.setBairro(cliente.getEndereco().getBairro());</span>
+<span class="fc" id="L38">            dto.setCidade(cliente.getEndereco().getCidade());</span>
+<span class="fc" id="L39">            dto.setEstado(cliente.getEndereco().getEstado());</span>
+<span class="fc" id="L40">            dto.setCep(cliente.getEndereco().getCep());</span>
         }
 
-<span class="fc" id="L38">        dto.setCpf(cliente.getCpf());</span>
-<span class="fc" id="L39">        dto.setObservacao(cliente.getObservacao());</span>
-<span class="fc" id="L40">        dto.setDataInclusao(cliente.getDataInclusao().atStartOfDay(ZoneId.systemDefault()));</span>
+<span class="fc" id="L43">        dto.setCpf(cliente.getCpf());</span>
+<span class="fc" id="L44">        dto.setObservacao(cliente.getObservacao());</span>
+<span class="fc" id="L45">        dto.setDataInclusao(cliente.getDataInclusao().atStartOfDay(ZoneId.systemDefault()));</span>
 
-<span class="fc" id="L42">        return dto;</span>
+<span class="fc" id="L47">        return dto;</span>
     }
 
-    /* Converte um ClienteDTO para Cliente
+    /** Converte um ClienteDTO para Cliente
      *
      * @param dto o ClienteDTO a ser convertido
      * @return o Cliente convertido
     */
     public Cliente toEntity(final ClienteDTO dto) {
-<span class="fc" id="L51">        final Cliente cliente = new Cliente();</span>
-<span class="fc" id="L52">        cliente.setId(dto.getId());</span>
-<span class="fc" id="L53">        cliente.setNome(dto.getNome());</span>
-<span class="fc" id="L54">        cliente.setEmail(dto.getEmail());</span>
-<span class="fc" id="L55">        cliente.setTelefone(dto.getTelefone());</span>
+<span class="fc" id="L56">        final Cliente cliente = new Cliente();</span>
+<span class="fc" id="L57">        cliente.setId(dto.getId());</span>
+<span class="fc" id="L58">        cliente.setNome(dto.getNome());</span>
+<span class="fc" id="L59">        cliente.setEmail(dto.getEmail());</span>
+<span class="fc" id="L60">        cliente.setTelefone(dto.getTelefone());</span>
 
-<span class="fc" id="L57">        final Endereco endereco = new Endereco();</span>
-<span class="fc" id="L58">        endereco.setLogradouro(dto.getEndereco());</span>
-<span class="fc" id="L59">        endereco.setNumero(dto.getNumero());</span>
-<span class="fc" id="L60">        endereco.setComplemento(dto.getComplemento());</span>
-<span class="fc" id="L61">        endereco.setBairro(dto.getBairro());</span>
-<span class="fc" id="L62">        endereco.setCidade(dto.getCidade());</span>
-<span class="fc" id="L63">        endereco.setEstado(dto.getEstado());</span>
-<span class="fc" id="L64">        endereco.setCep(dto.getCep());</span>
+<span class="fc" id="L62">        final Endereco endereco = new Endereco();</span>
+<span class="fc" id="L63">        endereco.setLogradouro(dto.getEndereco());</span>
+<span class="fc" id="L64">        endereco.setNumero(dto.getNumero());</span>
+<span class="fc" id="L65">        endereco.setComplemento(dto.getComplemento());</span>
+<span class="fc" id="L66">        endereco.setBairro(dto.getBairro());</span>
+<span class="fc" id="L67">        endereco.setCidade(dto.getCidade());</span>
+<span class="fc" id="L68">        endereco.setEstado(dto.getEstado());</span>
+<span class="fc" id="L69">        endereco.setCep(dto.getCep());</span>
 
-<span class="fc" id="L66">        cliente.setEndereco(endereco);</span>
+<span class="fc" id="L71">        cliente.setEndereco(endereco);</span>
 
-<span class="fc" id="L68">        cliente.setCpf(dto.getCpf());</span>
-<span class="fc" id="L69">        cliente.setObservacao(dto.getObservacao());</span>
-<span class="fc" id="L70">        cliente.setDataInclusao(LocalDate.now());</span>
+<span class="fc" id="L73">        cliente.setCpf(dto.getCpf());</span>
+<span class="fc" id="L74">        cliente.setObservacao(dto.getObservacao());</span>
+<span class="fc" id="L75">        cliente.setDataInclusao(LocalDate.now());</span>
 
-<span class="fc" id="L72">        return cliente;</span>
+<span class="fc" id="L77">        return cliente;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

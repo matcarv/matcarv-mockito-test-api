@@ -5,7 +5,9 @@ import jakarta.persistence.Embeddable;
 import lombok.Data;
 
 /**
- * Endereço de uma pessoa (entidade embutida)
+ * Endereço de uma pessoa (entidade embutida).
+ *
+ * @author Weslley Matos
  */
 @Data
 @Embeddable

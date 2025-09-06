@@ -9,11 +9,16 @@ import java.time.ZoneId;
 
 import org.springframework.stereotype.Component;
 
-/* Conversor de Cliente */
+/**
+ * Conversor de Cliente.
+ * Responsável por converter entre Cliente e ClienteDTO.
+ *
+ * @author Weslley Matos
+ */
 @Component
 public class ClienteConverter {
 
-    /* Converte um Cliente para ClienteDTO
+    /** Converte um Cliente para ClienteDTO
      *
      * @param cliente o Cliente a ser convertido
      * @return o ClienteDTO convertido
@@ -42,7 +47,7 @@ public class ClienteConverter {
         return dto;
     }
 
-    /* Converte um ClienteDTO para Cliente
+    /** Converte um ClienteDTO para Cliente
      *
      * @param dto o ClienteDTO a ser convertido
      * @return o Cliente convertido

@@ -9,7 +9,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.context.annotation.ComponentScan;
 
 /**
- * Main application class for the MatCarv application.
+ * Classe principal da aplicação MatCarv.
+ * Responsável por inicializar o contexto Spring Boot.
+ *
+ * @author Weslley Matos
  */
 @EnableAutoConfiguration
 @SpringBootApplication
@@ -20,9 +23,9 @@ import org.springframework.context.annotation.ComponentScan;
 public class Application {
 
     /**
-     * Main method to run the Spring Boot application.
-     * 
-     * @param args
+     * Método principal para inicializar a aplicação Spring Boot.
+     *
+     * @param args argumentos de linha de comando
      */
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);

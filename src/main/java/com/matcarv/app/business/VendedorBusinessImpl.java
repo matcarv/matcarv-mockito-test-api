@@ -14,6 +14,8 @@ import lombok.Getter;
 
 /**
  * Business implementation for Vendedor entity.
+ * 
+ * @author Weslley Matos
  */
 @Component
 @Transactional(propagation = Propagation.SUPPORTS)
@@ -24,7 +26,7 @@ public class VendedorBusinessImpl implements VendedorBusiness {
     @Autowired
     private VendedorRepository vendedorRepository;
 
-    /* Insert or update Vendedor
+    /** Insert or update Vendedor
      *
      * @param vendedor the Vendedor entity to insert or update
      * @param transactionType the type of transaction (INSERT or UPDATE)
@@ -49,7 +51,7 @@ public class VendedorBusinessImpl implements VendedorBusiness {
         return getVendedorRepository().save(vendedor);
     }
 
-    /* Delete Vendedor by ID
+    /** Delete Vendedor by ID
      *
      * @param id the ID of the Vendedor entity to delete
      */
@@ -59,7 +61,7 @@ public class VendedorBusinessImpl implements VendedorBusiness {
         getVendedorRepository().deleteById(id);
     }
 
-    /* Find Vendedor by ID
+    /** Find Vendedor by ID
      *
      * @param id the ID of the Vendedor entity to find
      * @return the found Vendedor entity
@@ -70,7 +72,7 @@ public class VendedorBusinessImpl implements VendedorBusiness {
             .orElseThrow(() -> new EntityNotFoundException("Vendedor not found with id: " + id));
     }
 
-    /* Find Vendedor by CPF
+    /** Find Vendedor by CPF
      *
      * @param cpf the CPF of the Vendedor
      * @return the found Vendedor entity

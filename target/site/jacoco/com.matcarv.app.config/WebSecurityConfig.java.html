@@ -15,36 +15,39 @@ import org.springframework.security.web.SecurityFilterChain;
 
 /**
  * Configuration class for setting up web security using Spring Security.
+ * 
+ * @author Weslley Matos
  */
 @Configuration
 @EnableWebSecurity
-<span class="nc" id="L21">public class WebSecurityConfig {</span>
+<span class="nc" id="L23">public class WebSecurityConfig {</span>
 
     /**
-	 * 
-	 * @return
+	 * UserDetailsService bean.
+	 * @return UserDetailsService
 	 */
 	@Bean
 	UserDetailsService userDetailsService() {
-<span class="nc" id="L29">        final UserDetails user = User.withUsername(&quot;admin&quot;)</span>
-<span class="nc" id="L30">				.password(passwordEncoder().encode(&quot;123456&quot;))</span>
-<span class="nc" id="L31">				.roles(&quot;USER&quot;)</span>
-<span class="nc" id="L32">				.build();</span>
+<span class="nc" id="L31">        final UserDetails user = User.withUsername(&quot;admin&quot;)</span>
+<span class="nc" id="L32">				.password(passwordEncoder().encode(&quot;123456&quot;))</span>
+<span class="nc" id="L33">				.roles(&quot;USER&quot;)</span>
+<span class="nc" id="L34">				.build();</span>
 
-<span class="nc" id="L34">		return new InMemoryUserDetailsManager(user);</span>
+<span class="nc" id="L36">		return new InMemoryUserDetailsManager(user);</span>
 	}
 
     /**
+	 * Security filter chain bean.
 	 * 
-	 * @param http
-	 * @return
+	 * @param http the HttpSecurity
+	 * @return SecurityFilterChain
 	 * @throws Exception
 	 */
 	@Bean
     SecurityFilterChain filterChain(final HttpSecurity http) throws Exception {
-<span class="nc" id="L45">		http.csrf(csrf -&gt; csrf.disable());</span>
-<span class="nc" id="L46">        http.authorizeHttpRequests(auth -&gt; auth</span>
-<span class="nc" id="L47">            .requestMatchers(</span>
+<span class="nc" id="L48">		http.csrf(csrf -&gt; csrf.disable());</span>
+<span class="nc" id="L49">        http.authorizeHttpRequests(auth -&gt; auth</span>
+<span class="nc" id="L50">            .requestMatchers(</span>
                 &quot;/v2/api-docs/**&quot;, 
                 &quot;/swagger-ui/**&quot;, 
                 &quot;/swagger-resources/**&quot;,
@@ -52,21 +55,22 @@ import org.springframework.security.web.SecurityFilterChain;
                 &quot;/configuration/**&quot;, 
                 &quot;/&quot;, 
                 &quot;/docs&quot;
-<span class="nc" id="L55">            ).permitAll()</span>
-<span class="nc" id="L56">            .anyRequest().authenticated()</span>
+<span class="nc" id="L58">            ).permitAll()</span>
+<span class="nc" id="L59">            .anyRequest().authenticated()</span>
         )
-<span class="nc" id="L58">        .httpBasic(Customizer.withDefaults());</span>
+<span class="nc" id="L61">        .httpBasic(Customizer.withDefaults());</span>
 
-<span class="nc" id="L60">		return http.build();</span>
+<span class="nc" id="L63">		return http.build();</span>
 	}
 	
 	/**
+	 * Password encoder bean.
 	 * 
-	 * @return
+	 * @return PasswordEncoder
 	 */
 	@Bean
     PasswordEncoder passwordEncoder() {
-<span class="nc" id="L69">        return new BCryptPasswordEncoder();</span>
+<span class="nc" id="L73">        return new BCryptPasswordEncoder();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

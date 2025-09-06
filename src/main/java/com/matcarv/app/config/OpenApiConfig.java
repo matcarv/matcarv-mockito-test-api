@@ -9,13 +9,16 @@ import io.swagger.v3.oas.models.info.License;
 
 /**
  * Configuration class for OpenAPI documentation.
+ * 
+ * @author Weslley Matos
  */
 @Configuration
 public class OpenApiConfig {
     
     /**
+	 * Spring OpenAPI bean.
 	 * 
-	 * @return
+	 * @return OpenAPI
 	 */
 	@Bean
 	OpenAPI springOpenAPI() {

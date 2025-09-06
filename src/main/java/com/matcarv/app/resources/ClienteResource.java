@@ -12,7 +12,12 @@ import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import java.util.UUID;
 
-/* Controlador de Clientes */
+/**
+ * Controlador REST para operações de Cliente.
+ * Expõe endpoints para CRUD e busca por CPF.
+ *
+ * @author Weslley Matos
+ */
 @RestController
 @Tag(name = "Cliente", description = "Operações relacionadas a clientes")
 public class ClienteResource {
@@ -25,7 +30,7 @@ public class ClienteResource {
     @Autowired
     private ClienteConverter clienteConverter;
 
-    /* Endpoint para criação de Cliente
+    /** Endpoint para criação de Cliente
      *
      * @param clienteDTO Dados do Cliente a ser criado
      * @return ResponseEntity com o Cliente criado
@@ -53,7 +58,7 @@ public class ClienteResource {
         );
     }
 
-    /* Endpoint para atualização de Cliente
+    /** Endpoint para atualização de Cliente
      *
      * @param clienteDTO Dados do Cliente a ser atualizado
      * @return ResponseEntity com o Cliente atualizado
@@ -82,7 +87,7 @@ public class ClienteResource {
         );
     }
 
-    /* Endpoint para exclusão de Cliente
+    /** Endpoint para exclusão de Cliente
      *
      * @param id ID do Cliente a ser excluído
      * @return ResponseEntity com status da operação
@@ -109,7 +114,7 @@ public class ClienteResource {
         return ResponseEntity.ok().build();
     }
 
-    /* Obter Cliente por ID
+    /** Obter Cliente por ID
      *
      * @param id ID do Cliente
      * @return ClienteDTO
@@ -138,7 +143,7 @@ public class ClienteResource {
         );
     }
 
-      /* Obter Cliente por ID
+    /** Obter Cliente por ID
      *
      * @param id ID do Cliente
      * @return ClienteDTO

@@ -9,7 +9,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.context.annotation.ComponentScan;
 
 /**
- * Main application class for the MatCarv application.
+ * Classe principal da aplicação MatCarv.
+ * Responsável por inicializar o contexto Spring Boot.
+ *
+ * @author Weslley Matos
  */
 @EnableAutoConfiguration
 @SpringBootApplication
@@ -17,15 +20,15 @@ import org.springframework.context.annotation.ComponentScan;
 @EntityScan( basePackages = {&quot;com.matcarv.app.entities&quot;})
 @EnableJpaRepositories(basePackages = { &quot;com.matcarv.app.repository&quot;})
 @ComponentScan(basePackages = {&quot;com.matcarv.app&quot;})
-<span class="nc" id="L20">public class Application {</span>
+<span class="nc" id="L23">public class Application {</span>
 
     /**
-     * Main method to run the Spring Boot application.
-     * 
-     * @param args
+     * Método principal para inicializar a aplicação Spring Boot.
+     *
+     * @param args argumentos de linha de comando
      */
     public static void main(String[] args) {
-<span class="nc" id="L28">        SpringApplication.run(Application.class, args);</span>
-<span class="nc" id="L29">    }</span>
+<span class="nc" id="L31">        SpringApplication.run(Application.class, args);</span>
+<span class="nc" id="L32">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

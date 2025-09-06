@@ -1,3 +1,9 @@
+/**
+ * Entidade Vendedor.
+ * Representa um vendedor do sistema.
+ *
+ * @author Weslley Matos
+ */
 package com.matcarv.app.entities;
 
 import java.math.BigDecimal;

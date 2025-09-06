@@ -19,14 +19,19 @@ import java.util.UUID;
 @Tag(name = "Vendedor", description = "Operações relacionadas a vendedores")
 public class VendedorResource {
 
+    /* Injeção de dependência */
     @Autowired
     private VendedorBusiness vendedorBusiness;
 
+    /* Injeção de dependência */
     @Autowired
     private VendedorConverter vendedorConverter;
 
     /**
      * Endpoint para criação de Vendedor
+     * 
+     * @param vendedorDTO Dados do Vendedor a ser criado
+     * @return ResponseEntity com o Vendedor criado
      */
     @Operation(
         summary = "Criar vendedor",
@@ -53,6 +58,9 @@ public class VendedorResource {
 
     /**
      * Endpoint para atualização de Vendedor
+     *
+     * @param vendedorDTO Dados do Vendedor a ser atualizado
+     * @return ResponseEntity com o Vendedor atualizado
      */
     @Operation(
         summary = "Atualizar vendedor",
@@ -80,6 +88,9 @@ public class VendedorResource {
 
     /**
      * Endpoint para exclusão de Vendedor
+     * 
+     * @param id ID do Vendedor a ser excluído
+     * @return ResponseEntity sem conteúdo
      */
     @Operation(
         summary = "Excluir vendedor",
@@ -104,6 +115,9 @@ public class VendedorResource {
 
     /**
      * Obter Vendedor por ID
+     * 
+     * @param id ID do Vendedor a ser obtido
+     * @return ResponseEntity com o Vendedor encontrado
      */
     @Operation(
         summary = "Buscar vendedor por ID",
@@ -131,6 +145,9 @@ public class VendedorResource {
 
     /**
      * Obter Vendedor por CPF
+     * 
+     * @param cpf CPF do Vendedor a ser obtido
+     * @return ResponseEntity com o Vendedor encontrado
      */
     @Operation(
         summary = "Buscar vendedor por CPF",
