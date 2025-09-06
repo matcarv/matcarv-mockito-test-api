@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MicroserviceExceptionHandler.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">matcarv-mockito-test-api</a> &gt; <a href="index.source.html" class="el_package">com.matcarv.app.config</a> &gt; <span class="el_source">MicroserviceExceptionHandler.java</span></div><h1>MicroserviceExceptionHandler.java</h1><pre class="source lang-java linenums">package com.matcarv.app.config;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
+/**
+ * Tratamento de exceções do microserviço.
+ */
+@ControllerAdvice
+<span class="nc" id="L13">public class MicroserviceExceptionHandler {</span>
+
+    /**
+     * Tratamento de exceções de requisição inválida.
+     * 
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity&lt;String&gt; handleBadRequestException(Exception e) {
+<span class="nc" id="L23">        return ResponseEntity.status(HttpStatus.BAD_REQUEST)</span>
+<span class="nc" id="L24">                .body(&quot;Erro de requisição inválida: &quot; + e.getMessage());</span>
+    }
+
+    /**
+	 * Tratamento de exceções de validação.
+     * 
+	 * @param e
+	 * @return
+	 */
+	@ExceptionHandler({ MethodArgumentNotValidException.class })
+	public ResponseEntity&lt;?&gt; handleException(final MethodArgumentNotValidException ex) {
+<span class="nc" id="L35">		return ResponseEntity</span>
+<span class="nc" id="L36">                .status(ex.getStatusCode())</span>
+<span class="nc" id="L37">                .body(ex.getBindingResult()</span>
+<span class="nc" id="L38">                		.getAllErrors()</span>
+<span class="nc" id="L39">                		.stream().map(e -&gt; { </span>
+<span class="nc" id="L40">                			return e.getDefaultMessage(); </span>
+                		})
+                	);
+	 }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

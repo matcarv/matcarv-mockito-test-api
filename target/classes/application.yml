@@ -1,0 +1,28 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /mockito/v1
+  
+spring:
+  application:
+    name: mockito
+  jpa:
+    database: MYSQL
+    show-sql: true
+    generate-ddl: true
+    properties:
+      hibernate:
+        ddl-auto: update
+        allow-jdbc-metadata-access: false
+  datasource:
+    url: jdbc:mysql://host.docker.internal:3306/mockito_db
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: mockito123
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER    
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html

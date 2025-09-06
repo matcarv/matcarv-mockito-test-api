@@ -1,0 +1,28 @@
+version: "3.7"
+
+services:
+  mysql:
+    image: mysql:5.7
+    platform: linux/amd64
+    container_name: mysql
+    hostname: mysql
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: mockito_db
+      MYSQL_USER: mockito
+      MYSQL_ROOT_PASSWORD: mockito123
+
+  api:
+    build:
+      context: .
+    platform: linux/amd64
+    container_name: mockito-test-api
+    hostname: mockito-test-api
+    ports:
+      - "8080:8080"
+    depends_on:
+      mysql:
+        condition: service_started
+        restart: true

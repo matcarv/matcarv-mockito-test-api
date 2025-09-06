@@ -1,0 +1,6 @@
+com/matcarv/app/business/ClienteBusinessImplTest.class
+com/matcarv/app/converters/ClienteConverterTest.class
+com/matcarv/app/business/VendedorBusinessImplTest.class
+com/matcarv/app/converters/VendedorConverterTest.class
+com/matcarv/app/resources/VendedorResourceTest.class
+com/matcarv/app/resources/ClienteResourceTest.class
