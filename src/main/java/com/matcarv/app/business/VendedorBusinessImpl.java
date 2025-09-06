@@ -4,7 +4,6 @@ import com.matcarv.app.entities.Vendedor;
 import com.matcarv.app.enums.TransactionType;
 import com.matcarv.app.repository.VendedorRepository;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,8 +22,16 @@ public class VendedorBusinessImpl implements VendedorBusiness {
 
     /* Repository for Vendedor entity */
     @Getter
-    @Autowired
-    private VendedorRepository vendedorRepository;
+    private final VendedorRepository vendedorRepository;
+
+    /**
+     * Injeção de dependência via construtor.
+     * 
+     * @param vendedorRepository repositório de Vendedor
+     */
+    public VendedorBusinessImpl(final VendedorRepository vendedorRepository) {
+        this.vendedorRepository = vendedorRepository;
+    }
 
     /** Insert or update Vendedor
      *

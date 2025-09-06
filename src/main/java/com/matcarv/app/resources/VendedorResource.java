@@ -20,12 +20,23 @@ import java.util.UUID;
 public class VendedorResource {
 
     /* Injeção de dependência */
-    @Autowired
-    private VendedorBusiness vendedorBusiness;
+    private final VendedorBusiness vendedorBusiness;
 
-    /* Injeção de dependência */
-    @Autowired
-    private VendedorConverter vendedorConverter;
+    /* Conversor de Vendedor */
+    private final VendedorConverter vendedorConverter;
+
+    /**
+     * Injeção de dependências via construtor.
+     * 
+     * @param vendedorBusiness o serviço de negócio de Vendedor
+     * @param vendedorConverter o conversor de Vendedor
+     */
+    public VendedorResource(
+            final VendedorBusiness vendedorBusiness, 
+            final VendedorConverter vendedorConverter) {
+        this.vendedorBusiness = vendedorBusiness;
+        this.vendedorConverter = vendedorConverter;
+    }
 
     /**
      * Endpoint para criação de Vendedor

@@ -48,6 +48,7 @@ public class VendedorDTO {
 	private String numero;
 
 	/** Complemento do endereço */
+	@NotBlank(message = "Complemento é obrigatório")
 	private String complemento;
 
 	/** Bairro do vendedor */

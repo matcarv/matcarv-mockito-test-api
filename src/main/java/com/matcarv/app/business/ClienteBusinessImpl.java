@@ -5,7 +5,6 @@ import com.matcarv.app.enums.TransactionType;
 import com.matcarv.app.repository.ClienteRepository;
 import lombok.Getter;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,9 +24,16 @@ public class ClienteBusinessImpl implements ClienteBusiness {
 	 * Repositório para Cliente.
 	 */
 	@Getter
-	@Autowired
-	private ClienteRepository clienteRepository;
+	private final ClienteRepository clienteRepository;
 
+	/**
+	 * Injeção de dependência via construtor.
+	 * 
+	 * @param clienteRepository repositório de Cliente
+	 */
+	public ClienteBusinessImpl(final ClienteRepository clienteRepository) {
+		this.clienteRepository = clienteRepository;
+	}
 
 	/**
 	 * Insere ou atualiza um cliente.

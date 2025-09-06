@@ -4,7 +4,6 @@ import com.matcarv.app.business.ClienteBusiness;
 import com.matcarv.app.enums.TransactionType;
 import com.matcarv.app.converters.ClienteConverter;
 import com.matcarv.app.dtos.ClienteDTO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -23,12 +22,23 @@ import java.util.UUID;
 public class ClienteResource {
 
     /* Injeção de dependência */
-    @Autowired
-    private ClienteBusiness clienteBusiness;
+    private final ClienteBusiness clienteBusiness;
 
-    /* Injeção de dependência */
-    @Autowired
-    private ClienteConverter clienteConverter;
+    /* Conversor de Cliente */
+    private final ClienteConverter clienteConverter;
+
+    /**
+     * Injeção de dependências via construtor.
+     * 
+     * @param clienteBusiness o serviço de negócio de Cliente
+     * @param clienteConverter o conversor de Cliente
+     */
+    public ClienteResource(
+            final ClienteBusiness clienteBusiness, 
+            final ClienteConverter clienteConverter) {
+        this.clienteBusiness = clienteBusiness;
+        this.clienteConverter = clienteConverter;
+    }
 
     /** Endpoint para criação de Cliente
      *
