@@ -4,6 +4,8 @@ import com.matcarv.app.business.ClienteBusiness;
 import com.matcarv.app.enums.TransactionType;
 import com.matcarv.app.converters.ClienteConverter;
 import com.matcarv.app.dtos.ClienteDTO;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -60,8 +62,8 @@ public class ClienteResource {
         """
     )
     @PostMapping("/cliente")
-    public ResponseEntity<?> insert(@Valid @RequestBody final ClienteDTO clienteDTO) {
-        return ResponseEntity.created(null).body(
+    public ResponseEntity<ClienteDTO> insert(@Valid @RequestBody final ClienteDTO clienteDTO) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(
             clienteConverter.toDTO(
                 clienteBusiness.insertOrUpdate(clienteConverter.toEntity(clienteDTO), TransactionType.INSERT)
             )
@@ -89,7 +91,7 @@ public class ClienteResource {
         """
     )
     @PutMapping("/cliente")
-    public ResponseEntity<?> update(@Valid @RequestBody final ClienteDTO clienteDTO) {
+    public ResponseEntity<ClienteDTO> update(@Valid @RequestBody final ClienteDTO clienteDTO) {
         return ResponseEntity.ok(
             clienteConverter.toDTO(
                 clienteBusiness.insertOrUpdate(clienteConverter.toEntity(clienteDTO), TransactionType.UPDATE)
@@ -118,7 +120,7 @@ public class ClienteResource {
         """
     )
     @DeleteMapping("/cliente/{id}")
-    public ResponseEntity<?> delete(@PathVariable final UUID id) {
+    public ResponseEntity<Void> delete(@PathVariable final UUID id) {
         clienteBusiness.deleteById(id);
 
         return ResponseEntity.ok().build();
@@ -145,7 +147,7 @@ public class ClienteResource {
         """
     )
     @GetMapping("/cliente/{id}")
-    public ResponseEntity<?> getClienteById(@PathVariable final UUID id) {
+    public ResponseEntity<ClienteDTO> getClienteById(@PathVariable final UUID id) {
         return ResponseEntity.ok(
             clienteConverter.toDTO(
                 clienteBusiness.findById(id)
@@ -174,7 +176,7 @@ public class ClienteResource {
         """
     )
     @GetMapping("/cliente/cpf/{cpf}")
-    public ResponseEntity<?> getClienteByCpf(@PathVariable final String cpf) {
+    public ResponseEntity<ClienteDTO> getClienteByCpf(@PathVariable final String cpf) {
         return ResponseEntity.ok(
             clienteConverter.toDTO(
                 clienteBusiness.findByCpf(cpf)

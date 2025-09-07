@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 /* Testes unitários para o recurso Vendedor */
-public class VendedorResourceTest {
+class VendedorResourceTest {
 
     /* Mock do VendedorBusiness */
     @Mock
@@ -39,7 +39,7 @@ public class VendedorResourceTest {
 
     /* Teste de inserção */
     @Test
-    public void testInsert() {
+    void testInsert() {
         final VendedorDTO dto = new VendedorDTO();
         final Vendedor entity = new Vendedor();
         
@@ -53,7 +53,7 @@ public class VendedorResourceTest {
     }
 
     @Test
-    public void testUpdate() {
+    void testUpdate() {
         final VendedorDTO dto = new VendedorDTO();
         final Vendedor entity = new Vendedor();
         
@@ -68,7 +68,7 @@ public class VendedorResourceTest {
 
     /* Teste de deleção */
     @Test
-    public void testDelete() {
+    void testDelete() {
         final UUID id = UUID.randomUUID();
         doNothing().when(vendedorBusiness).deleteById(id);
         
@@ -78,7 +78,7 @@ public class VendedorResourceTest {
 
     /* Teste de busca por ID */
     @Test
-    public void testGetVendedorById() {
+    void testGetVendedorById() {
         final UUID id = UUID.randomUUID();
         final Vendedor entity = new Vendedor();
         final VendedorDTO dto = new VendedorDTO();
@@ -92,7 +92,7 @@ public class VendedorResourceTest {
     }
     /* Teste de busca por CPF */
     @Test
-    public void testGetVendedorByCpf() {
+    void testGetVendedorByCpf() {
         final String cpf = "98765432100";
         final Vendedor entity = new Vendedor();
         final VendedorDTO dto = new VendedorDTO();

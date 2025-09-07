@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 /* Test class for VendedorBusinessImpl */
-public class VendedorBusinessImplTest {
+class VendedorBusinessImplTest {
 
     /* Repository for Vendedor entity */
     @Mock
@@ -26,13 +26,13 @@ public class VendedorBusinessImplTest {
 
     /* Initialization */
     @BeforeEach
-    public void init() {
+    void init() {
         MockitoAnnotations.openMocks(this);
     }
 
     /* Test findById method */
     @Test
-    public void testFindById() {
+    void testFindById() {
         final Vendedor entity = createVendedor();
 
         when(vendedorRepository.findById(entity.getId())).thenReturn(Optional.of(entity));
@@ -45,7 +45,7 @@ public class VendedorBusinessImplTest {
 
     /* Test deleteById method */
     @Test
-    public void testDeleteById() {
+    void testDeleteById() {
         final UUID id = UUID.randomUUID();
        
         doNothing().when(vendedorRepository).deleteById(id);
@@ -55,7 +55,7 @@ public class VendedorBusinessImplTest {
 
     /* Test insertOrUpdate method for INSERT operation */
     @Test
-    public void testInsertOrUpdateInsert() {
+    void testInsertOrUpdateInsert() {
         final Vendedor entity = createVendedor();
         
         when(vendedorRepository.save(entity)).thenReturn(entity);
@@ -67,7 +67,7 @@ public class VendedorBusinessImplTest {
 
     /* Test insertOrUpdate method for UPDATE operation */
     @Test
-    public void testInsertOrUpdateUpdate() {
+    void testInsertOrUpdateUpdate() {
         final Vendedor entity = createVendedor();
 
         when(vendedorRepository.findById(entity.getId())).thenReturn(Optional.of(entity));
@@ -82,7 +82,7 @@ public class VendedorBusinessImplTest {
     }
 
     @Test
-    public void testFindByCpf() {
+    void testFindByCpf() {
         final Vendedor entity = createVendedor();
         final String cpf = "98765432100";
 

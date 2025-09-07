@@ -1,6 +1,5 @@
 package com.matcarv.app.business;
 
-import com.matcarv.app.business.ClienteBusinessImpl;
 import com.matcarv.app.entities.Cliente;
 import com.matcarv.app.enums.TransactionType;
 import com.matcarv.app.repository.ClienteRepository;
@@ -15,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 /* Test class for ClienteBusinessImpl */
-public class ClienteBusinessImplTest {
+class ClienteBusinessImplTest {
 
     /* Repository for Cliente entity */
     @Mock
@@ -27,13 +26,13 @@ public class ClienteBusinessImplTest {
 
     /* Initialization */
     @BeforeEach
-    public void init() {
+    void init() {
         MockitoAnnotations.openMocks(this);
     }
 
     /* Test findById method */
     @Test
-    public void testFindById() {
+    void testFindById() {
         final Cliente entity = createCliente();
         when(clienteRepository.findById(entity.getId())).thenReturn(Optional.of(entity));
 
@@ -45,7 +44,7 @@ public class ClienteBusinessImplTest {
 
     /* Test deleteById method */
     @Test
-    public void testDeleteById() {
+    void testDeleteById() {
         final UUID id = UUID.randomUUID();
 
         doNothing().when(clienteRepository).deleteById(id);
@@ -56,7 +55,7 @@ public class ClienteBusinessImplTest {
 
     /* Test insertOrUpdate method for INSERT operation */
     @Test
-    public void testInsertOrUpdateInsert() {
+    void testInsertOrUpdateInsert() {
         final Cliente entity = createCliente();
         when(clienteRepository.save(entity)).thenReturn(entity);
         
@@ -68,7 +67,7 @@ public class ClienteBusinessImplTest {
 
     /* Test insertOrUpdate method for UPDATE operation */
     @Test
-    public void testInsertOrUpdateUpdate() {
+    void testInsertOrUpdateUpdate() {
         final Cliente entity = createCliente();
 
         when(clienteRepository.findById(entity.getId())).thenReturn(Optional.of(entity));
@@ -84,7 +83,7 @@ public class ClienteBusinessImplTest {
 
     /* Test findByCpf method */
     @Test
-    public void testFindByCpf() {
+    void testFindByCpf() {
         final Cliente entity = createCliente();
         final String cpf = "12345678901";
 

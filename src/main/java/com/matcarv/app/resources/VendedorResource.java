@@ -4,7 +4,8 @@ import com.matcarv.app.business.VendedorBusiness;
 import com.matcarv.app.enums.TransactionType;
 import com.matcarv.app.converters.VendedorConverter;
 import com.matcarv.app.dtos.VendedorDTO;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -59,8 +60,8 @@ public class VendedorResource {
         """
     )
     @PostMapping("/vendedor")
-    public ResponseEntity<?> insert(@Valid @RequestBody final VendedorDTO vendedorDTO) {
-        return ResponseEntity.created(null).body(
+    public ResponseEntity<VendedorDTO> insert(@Valid @RequestBody final VendedorDTO vendedorDTO) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(
             vendedorConverter.toDTO(
                 vendedorBusiness.insertOrUpdate(vendedorConverter.toEntity(vendedorDTO), TransactionType.INSERT)
             )
@@ -89,7 +90,7 @@ public class VendedorResource {
         """
     )
     @PutMapping("/vendedor")
-    public ResponseEntity<?> update(@Valid @RequestBody final VendedorDTO vendedorDTO) {
+    public ResponseEntity<VendedorDTO> update(@Valid @RequestBody final VendedorDTO vendedorDTO) {
         return ResponseEntity.ok(
             vendedorConverter.toDTO(
                 vendedorBusiness.insertOrUpdate(vendedorConverter.toEntity(vendedorDTO), TransactionType.UPDATE)
@@ -119,7 +120,7 @@ public class VendedorResource {
         """
     )
     @DeleteMapping("/vendedor/{id}")
-    public ResponseEntity<?> delete(@PathVariable final UUID id) {
+    public ResponseEntity<Void> delete(@PathVariable final UUID id) {
         vendedorBusiness.deleteById(id);
         return ResponseEntity.ok().build();
     }
@@ -146,7 +147,7 @@ public class VendedorResource {
         """
     )
     @GetMapping("/vendedor/{id}")
-    public ResponseEntity<?> getVendedorById(@PathVariable final UUID id) {
+    public ResponseEntity<VendedorDTO> getVendedorById(@PathVariable final UUID id) {
         return ResponseEntity.ok(
             vendedorConverter.toDTO(
                 vendedorBusiness.findById(id)
@@ -176,7 +177,7 @@ public class VendedorResource {
         """
     )
     @GetMapping("/vendedor/cpf/{cpf}")
-    public ResponseEntity<?> getVendedorByCpf(@PathVariable final String cpf) {
+    public ResponseEntity<VendedorDTO> getVendedorByCpf(@PathVariable final String cpf) {
         return ResponseEntity.ok(
             vendedorConverter.toDTO(
                 vendedorBusiness.findByCpf(cpf)

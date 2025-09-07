@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.time.LocalDate;
 
 /* Testes unitários para o ClienteConverter */
-public class ClienteConverterTest {
+class ClienteConverterTest {
 
     /* Instância do ClienteConverter */
     private final ClienteConverter converter = new ClienteConverter();
@@ -19,7 +19,7 @@ public class ClienteConverterTest {
      * Teste do método toDTO e toEntity do ClienteConverter
      */
     @Test
-    public void testToDTO() {
+    void testToDTO() {
         final Cliente cliente = new Cliente();
         cliente.setNome("Teste");
         cliente.setCpf("12345678901");
@@ -40,7 +40,7 @@ public class ClienteConverterTest {
      * Teste do método toEntity do ClienteConverter
      */
     @Test
-    public void testToEntity() {
+    void testToEntity() {
         final ClienteDTO dto = new ClienteDTO();
         dto.setNome("Teste DTO");
         dto.setCpf("98765432100");

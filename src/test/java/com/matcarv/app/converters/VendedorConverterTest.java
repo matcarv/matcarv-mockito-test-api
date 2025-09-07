@@ -9,14 +9,14 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.time.LocalDate;
 
 /* Testes unitários para o VendedorConverter */
-public class VendedorConverterTest {
+class VendedorConverterTest {
 
     /* Instância do VendedorConverter */
     private final VendedorConverter converter = new VendedorConverter();
     
     /* Teste do método toDTO do VendedorConverter */
     @Test
-    public void testToDTO() {
+    void testToDTO() {
         final Vendedor vendedor = new Vendedor();
         vendedor.setNome("Vendedor Teste");
         vendedor.setCpf("11122233344");
@@ -35,7 +35,7 @@ public class VendedorConverterTest {
 
     /* Teste do método toEntity do VendedorConverter */
     @Test
-    public void testToEntity() {
+    void testToEntity() {
         final VendedorDTO dto = new VendedorDTO();
         dto.setNome("DTO Vendedor");
         dto.setCpf("55566677788");
