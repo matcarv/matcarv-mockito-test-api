@@ -3,6 +3,7 @@ package com.matcarv.app.resources;
 import com.matcarv.app.business.VendedorBusiness;
 import com.matcarv.app.converters.VendedorConverter;
 import com.matcarv.app.dtos.VendedorDTO;
+import com.matcarv.app.dtos.VendedorSearchDTO;
 import com.matcarv.app.entities.Vendedor;
 import com.matcarv.app.enums.TransactionType;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,6 +13,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.ResponseEntity;
 
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -33,7 +37,7 @@ class VendedorResourceTest {
     private VendedorResource vendedorResource;
 
     @BeforeEach
-    public void init() {
+    void init() {
         MockitoAnnotations.openMocks(this);
     }
 
@@ -103,5 +107,21 @@ class VendedorResourceTest {
         final ResponseEntity<?> response = vendedorResource.getVendedorByCpf(cpf);
         assertEquals(200, response.getStatusCode().value());
         assertEquals(dto, response.getBody());
+    }
+
+    /* Teste de busca por filtros */
+    @Test
+    void testSearchVendedores() {
+        final Map<String, String> filters = Map.of("nome", "João", "cpf", "12345678901");
+
+        final VendedorSearchDTO vendedor1 = new VendedorSearchDTO(UUID.randomUUID(), "João", "12345678901", "email@email.com", BigDecimal.ZERO);
+        final VendedorSearchDTO vendedor2 = new VendedorSearchDTO(UUID.randomUUID(), "Maria", "10987654321", "email2@email.com", BigDecimal.ZERO);
+
+        when(vendedorBusiness.findByFilter(anyMap())).thenReturn(List.of(vendedor1, vendedor2));
+
+        final ResponseEntity<List<VendedorSearchDTO>> response = vendedorResource.getVendedorByFilter(filters);
+        assertEquals(200, response.getStatusCode().value());
+        assertEquals(List.of(vendedor1, vendedor2), response.getBody());
+        verify(vendedorBusiness, times(1)).findByFilter(anyMap());
     }
 }

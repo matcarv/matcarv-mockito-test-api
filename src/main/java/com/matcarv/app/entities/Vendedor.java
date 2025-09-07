@@ -1,9 +1,3 @@
-/**
- * Entidade Vendedor.
- * Representa um vendedor do sistema.
- *
- * @author Weslley Matos
- */
 package com.matcarv.app.entities;
 
 import java.math.BigDecimal;
@@ -12,6 +6,11 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+/** 
+ * Classe que representa um vendedor. 
+ * 
+ * @author Weslley Matos
+ */
 @Data
 @Entity
 @Table(name = "VENDEDOR")

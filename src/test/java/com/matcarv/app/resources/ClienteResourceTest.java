@@ -3,6 +3,8 @@ package com.matcarv.app.resources;
 import com.matcarv.app.business.ClienteBusiness;
 import com.matcarv.app.converters.ClienteConverter;
 import com.matcarv.app.dtos.ClienteDTO;
+import com.matcarv.app.dtos.ClienteSearchDTO;
+import com.matcarv.app.dtos.VendedorSearchDTO;
 import com.matcarv.app.entities.Cliente;
 import com.matcarv.app.enums.TransactionType;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,13 +14,17 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.ResponseEntity;
 
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyMap;
 import static org.mockito.Mockito.*;
 
 /* Testes unitários para o recurso Cliente */
-public class ClienteResourceTest {
+class ClienteResourceTest {
 
     /* Mock do ClienteBusiness */
     @Mock
@@ -34,13 +40,13 @@ public class ClienteResourceTest {
 
     /* Inicialização dos mocks */
     @BeforeEach
-    public void init() {
+    void init() {
         MockitoAnnotations.openMocks(this);
     }
 
     /* Teste de inserção */
     @Test
-    public void testInsert() {
+    void testInsert() {
         final ClienteDTO dto = new ClienteDTO();
         final Cliente entity = new Cliente();
         
@@ -55,7 +61,7 @@ public class ClienteResourceTest {
 
     /* Teste de atualização */
     @Test
-    public void testUpdate() {
+    void testUpdate() {
         final ClienteDTO dto = new ClienteDTO();
         final Cliente entity = new Cliente();
         
@@ -70,7 +76,7 @@ public class ClienteResourceTest {
 
     /* Teste de deleção */
     @Test
-    public void testDelete() {
+    void testDelete() {
         final UUID id = UUID.randomUUID();
         doNothing().when(clienteBusiness).deleteById(id);
 
@@ -81,7 +87,7 @@ public class ClienteResourceTest {
 
     /* Teste de busca por ID */
     @Test
-    public void testGetClienteById() {
+    void testGetClienteById() {
         final UUID id = UUID.randomUUID();
         final Cliente entity = new Cliente();
         final ClienteDTO dto = new ClienteDTO();
@@ -95,7 +101,7 @@ public class ClienteResourceTest {
     }
     /* Teste de busca por CPF */
     @Test
-    public void testGetClienteByCpf() {
+    void testGetClienteByCpf() {
         final String cpf = "12345678901";
         final Cliente entity = new Cliente();
         final ClienteDTO dto = new ClienteDTO();
@@ -106,5 +112,21 @@ public class ClienteResourceTest {
         final ResponseEntity<?> response = clienteResource.getClienteByCpf(cpf);
         assertEquals(200, response.getStatusCode().value());
         assertEquals(dto, response.getBody());
+    }
+
+        /* Teste de busca por filtros */
+    @Test
+    void testSearchClientes() {
+        final Map<String, String> filters = Map.of("nome", "João", "cpf", "12345678901");
+
+        final ClienteSearchDTO cliente1 = new ClienteSearchDTO(UUID.randomUUID(), "João", "12345678901", "email@email.com");
+        final ClienteSearchDTO cliente2 = new ClienteSearchDTO(UUID.randomUUID(), "Maria", "10987654321", "email2@email.com");
+
+        when(clienteBusiness.findByFilter(anyMap())).thenReturn(List.of(cliente1, cliente2));
+
+        final ResponseEntity<List<ClienteSearchDTO>> response = clienteResource.getClienteByFilter(filters);
+        assertEquals(200, response.getStatusCode().value());
+        assertEquals(List.of(cliente1, cliente2), response.getBody());
+        verify(clienteBusiness, times(1)).findByFilter(anyMap());
     }
 }

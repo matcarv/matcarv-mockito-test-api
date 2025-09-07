@@ -24,7 +24,7 @@ public class MicroserviceExceptionHandler {
      * @return ResponseEntity with error details
      */
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<String> handleBadRequestException(Exception e) {
+    public ResponseEntity<String> handleBadRequestException(final Exception e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body("Erro de requisição inválida: " + e.getMessage());
     }
@@ -32,7 +32,7 @@ public class MicroserviceExceptionHandler {
     /**
 	 * Tratamento de exceções de validação.
      * 
-	 * @param e the exception
+	 * @param ex the exception
 	 * @return ResponseEntity with error details
 	 */
     @ExceptionHandler({ MethodArgumentNotValidException.class })

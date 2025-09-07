@@ -1,13 +1,20 @@
 package com.matcarv.app.business;
 
+import com.matcarv.app.dtos.ClienteSearchDTO;
+import com.matcarv.app.dtos.VendedorSearchDTO;
+import com.matcarv.app.entities.Cliente;
 import com.matcarv.app.entities.Vendedor;
 import com.matcarv.app.enums.TransactionType;
 import com.matcarv.app.repository.VendedorRepository;
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import jakarta.persistence.EntityNotFoundException;
+
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import lombok.Getter;
 
@@ -89,5 +96,28 @@ public class VendedorBusinessImpl implements VendedorBusiness {
         return getVendedorRepository().findByCpf(cpf)
             .orElseThrow(() -> new EntityNotFoundException("Vendedor not found with CPF: " + cpf));
     }
+
+    /**
+	 * Busca vendedores por filtro usando Specification JPA.
+	 * 
+	 * @param filters mapa de filtros (nome, cpf)
+	 * @return lista de VendedorSearchDTO
+	 */
+	@Override
+	public List<VendedorSearchDTO> findByFilter(final Map<String, String> filters) {
+		Specification<Vendedor> spec = Specification.where(null);
+
+		if (filters.containsKey("nome")) {
+			spec = spec.and((root, query, cb) -> cb.like(cb.lower(root.get("nome")), "%" + filters.get("nome").toLowerCase() + "%"));
+		}
+		if (filters.containsKey("cpf")) {
+			spec = spec.and((root, query, cb) -> cb.equal(root.get("cpf"), filters.get("cpf")));
+		}
+        
+        // Projeção manual: busca entidades e converte para projection
+		return vendedorRepository.findAll(spec).stream()
+			.map(c -> new VendedorSearchDTO(c.getId(), c.getNome(), c.getCpf(), c.getEmail(), c.getComissao()))
+			.toList();
+	}
 
 }

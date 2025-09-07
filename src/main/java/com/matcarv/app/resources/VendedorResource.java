@@ -3,7 +3,9 @@ package com.matcarv.app.resources;
 import com.matcarv.app.business.VendedorBusiness;
 import com.matcarv.app.enums.TransactionType;
 import com.matcarv.app.converters.VendedorConverter;
+import com.matcarv.app.dtos.ClienteSearchDTO;
 import com.matcarv.app.dtos.VendedorDTO;
+import com.matcarv.app.dtos.VendedorSearchDTO;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +13,9 @@ import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
+
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -183,5 +188,31 @@ public class VendedorResource {
                 vendedorBusiness.findByCpf(cpf)
             )
         );
+    }
+
+        /**
+     * Busca vendedores por filtro.
+     *
+     * @param filters mapa de filtros (nome, cpf)
+     * @return lista de VendedorSearchDTO
+     */
+    @Operation(
+        summary = "Buscar vendedor por filtro de Nome e CPF",
+        description = """
+        ### Códigos de resposta possíveis
+
+        | Código | Significado                      |
+        |--------|----------------------------------|
+        | 200    | Cliente encontrado               |
+        | 400    | Requisição inválida              |
+        | 401    | Não autorizado                   |
+        | 403    | Proibido                         |
+        | 404    | Vendedor não encontrado          |
+        | 500    | Erro interno do servidor         |
+        """
+    )
+    @PostMapping("/vendedor/filter")
+    public ResponseEntity<List<VendedorSearchDTO>> getVendedorByFilter(@RequestBody final Map<String, String> filters) {
+        return ResponseEntity.ok(vendedorBusiness.findByFilter(filters));
     }
 }

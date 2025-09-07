@@ -1,7 +1,11 @@
 package com.matcarv.app.business;
 
+import com.matcarv.app.dtos.VendedorSearchDTO;
 import com.matcarv.app.entities.Vendedor;
 import com.matcarv.app.enums.TransactionType;
+
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -39,4 +43,12 @@ public interface VendedorBusiness {
      * @return the found Vendedor entity
      */
     public Vendedor findByCpf(String cpf);
+
+    /**
+     * Find Vendedors by filter using JPA Specification.
+     * 
+     * @param filters map of filters (nome, cpf)
+     * @return list of VendedorSearchDTO
+     */
+    public List<VendedorSearchDTO> findByFilter(final Map<String, String> filters);
 }

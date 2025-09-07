@@ -1,7 +1,11 @@
 package com.matcarv.app.business;
 
+import com.matcarv.app.dtos.ClienteSearchDTO;
 import com.matcarv.app.entities.Cliente;
 import com.matcarv.app.enums.TransactionType;
+
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -42,5 +46,13 @@ public interface ClienteBusiness {
      * @return Cliente encontrado ou null se não existir
      */
     public Cliente findByCpf(String cpf);
+
+    /**
+     * Busca clientes por filtro.
+     *
+     * @param filters mapa de filtros (nome, cpf)
+     * @return lista de ClienteSearchDTO
+     */
+    public List<ClienteSearchDTO> findByFilter(final Map<String, String> filters);
 
 }

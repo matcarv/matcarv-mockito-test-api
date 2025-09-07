@@ -6,6 +6,14 @@ package com.matcarv.app.enums;
  * @author Weslley Matos
  */
 public enum TransactionType {
+
+    /**
+     * Insert operation
+     */
     INSERT,
+    
+    /**
+     * Update operation
+     */
     UPDATE
 }

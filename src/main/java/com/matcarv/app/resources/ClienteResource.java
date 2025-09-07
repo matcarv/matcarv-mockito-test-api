@@ -4,6 +4,7 @@ import com.matcarv.app.business.ClienteBusiness;
 import com.matcarv.app.enums.TransactionType;
 import com.matcarv.app.converters.ClienteConverter;
 import com.matcarv.app.dtos.ClienteDTO;
+import com.matcarv.app.dtos.ClienteSearchDTO;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,9 @@ import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
+
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -155,9 +159,9 @@ public class ClienteResource {
         );
     }
 
-    /** Obter Cliente por ID
+    /** Obter Cliente por CPF
      *
-     * @param id ID do Cliente
+     * @param cpf CPF do Cliente
      * @return ClienteDTO
      */
     @Operation(
@@ -182,5 +186,31 @@ public class ClienteResource {
                 clienteBusiness.findByCpf(cpf)
             )
         );
+    }
+
+    /**
+     * Busca clientes por filtro.
+     *
+     * @param filters mapa de filtros (nome, cpf)
+     * @return lista de ClienteSearchDTO
+     */
+    @Operation(
+        summary = "Buscar cliente por filtro de Nome e CPF",
+        description = """
+        ### Códigos de resposta possíveis
+
+        | Código | Significado                      |
+        |--------|----------------------------------|
+        | 200    | Cliente encontrado               |
+        | 400    | Requisição inválida              |
+        | 401    | Não autorizado                   |
+        | 403    | Proibido                        |
+        | 404    | Cliente não encontrado           |
+        | 500    | Erro interno do servidor         |
+        """
+    )
+    @PostMapping("/cliente/filter")
+    public ResponseEntity<List<ClienteSearchDTO>> getClienteByFilter(@RequestBody final Map<String, String> filters) {
+        return ResponseEntity.ok(clienteBusiness.findByFilter(filters));
     }
 }

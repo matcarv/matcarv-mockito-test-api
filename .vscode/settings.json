@@ -4,5 +4,6 @@
     "sonarlint.connectedMode.project": {
         "connectionId": "matcarv",
         "projectKey": "matcarv-mockito-test-api"
-    }
+    },
+    "java.debug.settings.onBuildFailureProceed": true
 }

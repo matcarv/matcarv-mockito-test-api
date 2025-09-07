@@ -1,14 +1,23 @@
+
 package com.matcarv.app.business;
+
+import com.matcarv.app.dtos.ClienteSearchDTO;
+import org.springframework.data.jpa.domain.Specification;
+
 
 import com.matcarv.app.entities.Cliente;
 import com.matcarv.app.enums.TransactionType;
 import com.matcarv.app.repository.ClienteRepository;
+
 import lombok.Getter;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import jakarta.persistence.EntityNotFoundException;
+
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -92,5 +101,27 @@ public class ClienteBusinessImpl implements ClienteBusiness {
 	public Cliente findByCpf(final String cpf) {
 		return clienteRepository.findByCpf(cpf)
 			.orElseThrow(() -> new EntityNotFoundException("Cliente not found with CPF: " + cpf));
+	}
+
+	/**
+	 * Busca clientes por filtro usando Specification JPA.
+	 * 
+	 * @param filters mapa de filtros (nome, cpf)
+	 * @return lista de ClienteSearchDTO
+	 */
+	@Override
+	public List<ClienteSearchDTO> findByFilter(final Map<String, String> filters) {
+		Specification<Cliente> spec = Specification.where(null);
+
+		if (filters.containsKey("nome")) {
+			spec = spec.and((root, query, cb) -> cb.like(cb.lower(root.get("nome")), "%" + filters.get("nome").toLowerCase() + "%"));
+		}
+		if (filters.containsKey("cpf")) {
+			spec = spec.and((root, query, cb) -> cb.equal(root.get("cpf"), filters.get("cpf")));
+		}
+		// Projeção manual: busca entidades e converte para projection
+		return clienteRepository.findAll(spec).stream()
+			.map(c -> new ClienteSearchDTO(c.getId(), c.getNome(), c.getCpf(), c.getEmail()))
+			.toList();
 	}
 }
