@@ -1,4 +1,3 @@
-
 # MatCarv - Mockito Test API
 
 API completa de exemplo utilizando Spring Boot, Mockito, OpenAPI, validações, cobertura de testes (JaCoCo), banco H2/MySQL, e Docker.
@@ -111,4 +110,7 @@ Altere conforme necessário para seu ambiente.
 - Para ambiente Docker, utilize o host `host.docker.internal` para acessar o MySQL local.
 
 ---
+
 Desenvolvido por MatCarv
+
+[![SonarQube Cloud](https://sonarcloud.io/images/project_badges/sonarcloud-light.svg)](https://sonarcloud.io/summary/new_code?id=matcarv-mockito-test-api)
